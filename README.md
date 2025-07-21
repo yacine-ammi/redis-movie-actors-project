@@ -96,9 +96,8 @@ Each query is explained and documented in the notebook.
 
 ## 📝 Documentation
 
-- **Notebook**: `redis_data_exploration.ipynb` includes all logic, queries, and outputs
-- **PDF Report**: `queries_results.pdf` is a clean export of the notebook
-- **Methodology**: See [`methodology.md`](./methodology.md) for the implementation breakdown
+- **Notebook**: `results_notebook.ipynb` includes all logic, queries, and outputs
+- **PDF Report**: `results_PDF.pdf` is a clean export of the notebook results
 
 ---
 
