@@ -1,62 +1,145 @@
-# Methodology
 
-This document summarizes the approach followed to complete the Redis Movie & Actor data exploration project.
+# 🎬 Redis Movies & Actors Data Exploration
 
-
-## 1. Environment Setup
-
-- **Docker Compose** was used to launch:
-  - A Redis server (`redis:latest`)
-  - RedisInsight GUI (`redis/redisinsight:latest`) for visual inspection
-- Two `.redis` files (`actors.redis` and `movies.redis`) were placed in a mounted `data/` folder.
+This project explores a dataset of over 1,300 actors and 900 movies using **Redis**, a high-performance NoSQL in-memory data store. It showcases how to use **Docker**, **RedisInsight**, and **Python (Jupyter Notebook)** for real-world data querying and manipulation.
 
 ---
 
-## 2. Data Loading
+## 📚 Project Objectives
 
-- Data insertion was done using the Redis CLI:
-  ```bash
-  docker exec -i redis-server redis-cli < data/actors.redis
-  docker exec -i redis-server redis-cli < data/movies.redis
+- Set up Redis and RedisInsight using Docker Compose
+- Load actor and movie datasets using `HSET` commands
+- Query the Redis database using Python
+- Perform common data operations: filtering, updating, and deleting records
+- Present results clearly in a notebook and final PDF report
 
-    This created HSET entries in Redis for actors and movies using keys like actor:<id> and movie:<id>.
+---
 
-## 3. Data Exploration (Python)
+## 🧠 Skills Demonstrated
 
-    A Jupyter notebook was used to connect to Redis using the redis Python client.
+✅ Redis CLI & Hashes  
+✅ Docker Compose  
+✅ Python Redis Client (`redis-py`)  
+✅ Jupyter Notebook for Data Exploration  
+✅ RedisInsight GUI  
+✅ Git & GitHub Version Control  
 
-    Key patterns (actor:*, movie:*) were used to scan and interact with hash entries.
+---
 
-Queries performed:
+## 🗂️ Project Structure
 
-    Counted actors and movies
+```
+redis-movie-actors-project/
+├── data/
+│   ├── actors.redis
+│   ├── movies.redis
+│   └── dump.rdb                  # Redis database dump
+├── notebooks/
+│   └── results_notebook.ipynb    # This notebook
+├── docker-compose.yml            # Redis + RedisInsight setup
+├── py_script.py                  # Python script for data operations
+├── README.md                     # Project overview & instructions
+├── requirements.txt              # Python dependencies
+└── results_PDF.pdf               # Exported notebook results as PDF
+```
 
-    Filtered actors by birth year
+---
 
-    Retrieved movie details by title
+## ⚙️ Environment Setup
 
-    Ranked top-rated movies
+Using Docker Compose to launch:
 
-    Updated and deleted specific records
+- **Redis server** (`redis:latest`) on port 6379
+- **RedisInsight GUI** (`redis/redisinsight:latest`) on port 5540
 
-    Inserted a new actor entry
+```bash
+docker-compose up -d
+```
 
-## 4. Results and Documentation
+> RedisInsight UI available at [http://localhost:5540](http://localhost:5540)
 
-    All outputs were documented in the Jupyter notebook.
+---
 
-    The notebook was exported as a PDF for submission.
+## 📥 Data Loading
 
-    This README and the notebook describe how to run and reproduce the work.
+Insert actor and movie data into Redis using:
 
-✅ Tools Used
+```bash
+docker exec -i redis-server redis-cli < data/actors.redis
+docker exec -i redis-server redis-cli < data/movies.redis
+```
 
-    Redis
+This stores each actor and movie as a Redis hash under keys like:
+- `actor:<id>`
+- `movie:<id>`
 
-    Docker & Docker Compose
+---
 
-    RedisInsight
+## 🧪 Data Exploration in Python
 
-    Python (Jupyter Notebook)
+Data exploration was done in `redis_data_exploration.ipynb` using the `redis` Python client.
 
-    Redis Python client (redis-py)
+Queries and operations included:
+
+- 📊 Count: number of actors and movies
+- 👤 Filter: actors born before 1980
+- 🎞️ Lookup: genre and rating of "The Imitation Game"
+- 🏆 Ranking: top 5 highest-rated movies
+- 🎯 Filter: movies rated above 7.5
+- 🔧 Update: modify movie rating
+- ➕ Insert: new actor (Zendaya, 1996)
+- 🗑️ Delete: movie titled "The Room"
+
+Each query is explained and documented in the notebook.
+
+---
+
+## 📝 Documentation
+
+- **Notebook**: `redis_data_exploration.ipynb` includes all logic, queries, and outputs
+- **PDF Report**: `queries_results.pdf` is a clean export of the notebook
+- **Methodology**: See [`methodology.md`](./methodology.md) for the implementation breakdown
+
+---
+
+## 🚀 How to Run the Project
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yacine-ammi/redis-movie-actors-project.git
+cd redis-movie-actors-project
+```
+
+2. Start Redis + RedisInsight:
+
+```bash
+docker-compose up -d
+```
+
+3. Load the data:
+
+```bash
+docker exec -i redis-server redis-cli < data/actors.redis
+docker exec -i redis-server redis-cli < data/movies.redis
+```
+
+4. Open the notebook (`redis_data_exploration.ipynb`) in **VS Code**, **Jupyter**, or **JupyterLab** and run all cells.
+
+---
+
+## 📌 Final Deliverables
+
+- ✅ Redis database with data loaded
+- ✅ Fully working Docker Compose environment
+- ✅ Python-based exploration notebook
+- ✅ PDF with documented results
+- ✅ GitHub repository for sharing and versioning
+
+---
+
+## 🙋 About Me
+
+This project was developed as part of a NoSQL/Redis course and reflects my hands-on skills with Dockerized environments, NoSQL data stores, and Python-based data processing.
+
+Feel free to explore or contact me if you'd like to collaborate or give feedback!
